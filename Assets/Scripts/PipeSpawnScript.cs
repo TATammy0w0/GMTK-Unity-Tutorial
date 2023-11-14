@@ -12,7 +12,7 @@ public class PipeSpawnScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnPipe();
+        SpawnPipe();
     }
 
     // Update is called once per frame
@@ -20,17 +20,17 @@ public class PipeSpawnScript : MonoBehaviour
     {
         if (timer < spawnRate)
         {
-            timer = timer + Time.deltaTime;
+            // count up 1 each frame regardless of users' framerate
+            timer += Time.deltaTime;
         }
         else
         {
-            spawnPipe();
+            SpawnPipe();
             timer = 0;
         }
-
     }
 
-    void spawnPipe()
+    void SpawnPipe()
     {
         float lowestPoint = transform.position.y - heightOffset;
         float highestPoint = transform.position.y + heightOffset;

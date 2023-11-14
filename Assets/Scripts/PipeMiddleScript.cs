@@ -5,24 +5,19 @@ using UnityEngine;
 public class PipeMiddleScript : MonoBehaviour
 {
     public LogicScript logic;
-
-    // Start is called before the first frame update
     void Start()
     {
+        // When a gameObject does not exist in a scene, use this method to find it and access its component
+        // This method will look for the first GO in the hierarchy with the tag
+        // Remember to change the tag in the scene accordingly
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 3)
         {
-            logic.addScore(1);
+            logic.AddScore(1);
         }
         
     }

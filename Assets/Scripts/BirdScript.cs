@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class BirdScript : MonoBehaviour
     public LogicScript logic;
     public bool birdIsAlive = true;
 
-    // Start is called before the first frame update
+    // Start is called once before the first frame update
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
@@ -23,10 +24,22 @@ public class BirdScript : MonoBehaviour
             myRigidbody.velocity = Vector2.up * flapStrength;
         }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        logic.gameOver();
+        BirdDead();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag($"DeathZone"))
+        {
+            BirdDead();
+        }
+    }
+
+    private void BirdDead()
+    {
+        logic.GameOver();
         birdIsAlive = false;
     }
 }
